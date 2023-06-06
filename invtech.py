@@ -38,8 +38,9 @@ def close_app():
 	if value_close==True:
 		root.destroy()
 
+
 last_saved_id = None
-# Stores the data entered in the boxes
+# Stores the data entered in the text boxes
 customer_date=StringVar()
 customerno=StringVar()
 customername=StringVar()
@@ -83,6 +84,7 @@ text_box = Text(root, bg="#d0e3e3", width=50, height=30)
 text_box.insert(END, text_print)
 text_box.pack()
 
+
 # Clean the print box
 def update_text_clean():
     
@@ -116,6 +118,7 @@ def update_text_clean():
     
     text_box.delete(1.0, END)
     text_box.insert(END, text_print)
+
 
 # Refreshes the screen with the saved customer data
 def update_text_current(customerno):
@@ -153,7 +156,8 @@ def update_text_current(customerno):
     text_box.delete(1.0, END)
     text_box.insert(END, text_print)
 
-#update
+
+# Update
 def update_text(customerno):
     text_print = f"""Negocio
     Fecha: {customer_date.get()}
@@ -187,7 +191,7 @@ def update_text(customerno):
     text_box.delete(1.0, END)
     text_box.insert(END, text_print)
 
-# Read
+
 # Obtains the data from the database to display in
 def update_text_print():
     text_print = f"""Negocio
@@ -302,10 +306,9 @@ def read_reg():
     cursor_bd = conexion_bd.cursor()
     
     try:
-        # Usa una consulta preparada para evitar vulnerabilidades de seguridad
+        
         cursor_bd.execute("SELECT * FROM DATOSUSUARIO WHERE ID=?", (customerno.get(),))
 
-        # Devuelve el primer registro (si existe)
         usuario = cursor_bd.fetchone()
 
         if usuario is not None:
@@ -329,12 +332,10 @@ def read_reg():
         messagebox.showerror("Error", f"No se pudo leer el registro: {e}")
 
     conexion_bd.close()
-    # Actualiza el contenido de text_print con los valores obtenidos
+    
     update_text_print()
 
 
-
-# GPT
 def update_reg():
     global last_saved_id
     update_confirmation = messagebox.askyesno("Actualizar", "¿Actualizar registro?")
